@@ -12,8 +12,8 @@ void Setup() {
 	dir = STOP;
 	x = width / 2;
 	y = height / 2;
-	fruitX = rand() % width - 1;
-	fruitX = rand() % height - 1;
+	fruitX = rand() % width;
+	fruitX = rand() % height;
 	score = 0;
 }
 
@@ -38,6 +38,8 @@ void Draw() {
 	}
 	for (int i = 0; i < width + 2; ++i) std::cout << '#';
 	std::cout << std::endl;
+
+	std::cout << "Score: " << score;
 }
 
 void Input() {
@@ -83,6 +85,12 @@ void Logic() {
 
 	if (x > width || y > height || x < 0 || y < 0)
 		gameOver = true;
+	if (x == fruitX && y == fruitY)
+	{
+		score += 10;
+		fruitX = rand() % width;
+		fruitX = rand() % height;
+	}
 }
 int main() {
 
