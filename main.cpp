@@ -81,6 +81,8 @@ void Logic() {
 		break;
 	}
 
+	if (x > width || y > height || x < 0 || y < 0)
+		gameOver = true;
 }
 int main() {
 
