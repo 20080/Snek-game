@@ -2,6 +2,7 @@
 #include<conio.h>
 #include <ctime>//for linux
 #include <windows.h>//for windows
+#include<time.h>
 bool gameOver;
 const int width = 20;
 const int height = 20;
@@ -12,12 +13,13 @@ int tailX[100], tailY[100];
 int nTail = 0;
 
 void Setup() {
+	srand(time(0));
 	gameOver = false;
 	dir = STOP;
 	x = width / 2;
 	y = height / 2;
 	fruitX = rand() % width;
-	fruitX = rand() % height;
+	fruitY = rand() % height;
 	score = 0;
 }
 
@@ -115,8 +117,12 @@ void Logic() {
 		break;
 	}
 
-	if (x > width || y > height || x < 0 || y < 0)
-		gameOver = true;
+	// if (x > width || y > height || x < 0 || y < 0)
+	// 	gameOver = true;
+
+	if (x >= width) x = 0; else if (x < 0) x = width - 1;
+	if (y >= height) y = 0; else if (y < 0) y = height - 1;
+
 	for (int i = 0; i < nTail; ++i)
 	{
 		if (tailX[i] == x && tailY[i] == y)
@@ -137,7 +143,7 @@ int main() {
 		Draw();
 		Input();
 		Logic();
-		Sleep(100);
+		Sleep(10);
 		//sleep() to slow the game
 	}
 }
